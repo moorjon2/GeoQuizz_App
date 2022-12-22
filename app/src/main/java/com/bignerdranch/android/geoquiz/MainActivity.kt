@@ -34,21 +34,41 @@ class MainActivity : AppCompatActivity() {
         // View Binding - use
         binding.trueButton.setOnClickListener { view: View ->
             // Do something in response to the click here
-            Toast.makeText(
-                this,
-                R.string.correct_toast,
-                Toast.LENGTH_SHORT
-            ).show()
+            checkAnswer(true)
         }
 
         // View Binding - use
         binding.falseButton.setOnClickListener { view: View ->
             // Do something in response to the click here
-            Toast.makeText(
-                this,
-                R.string.incorrect_toast,
-                Toast.LENGTH_SHORT
-            ).show()
+            checkAnswer(false)
         }
+
+        binding.nextButton.setOnClickListener {
+            currentIndex = (currentIndex + 1) % questionBank.size
+            updateQuestion()
+        }
+
+        updateQuestion()
+    }
+
+    private fun updateQuestion() {
+        val questionTextResId = questionBank[currentIndex].textResId
+        binding.questionTextView.setText(questionTextResId)
+    }
+
+    private fun checkAnswer(userAnswer: Boolean) {
+        val correctAnswer = questionBank[currentIndex].answer
+
+        val messageResId = if (userAnswer == correctAnswer) {
+            R.string.correct_toast
+        } else {
+            R.string.incorrect_toast
+        }
+
+        Toast.makeText(
+            this,
+            messageResId,
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }
