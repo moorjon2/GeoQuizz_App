@@ -12,7 +12,7 @@
     <!--Button Labels-->
     <string name="true_button">True</string>
     <string name="false_button">False</string>
-    <string name="next_button">Next &#9658;</string>
+    <string name="next_button">Next</string>
 
     <!--Toast Messages-->
     <string name="correct_toast">Correct!</string>
