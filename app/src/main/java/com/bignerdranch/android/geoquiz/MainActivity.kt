@@ -44,16 +44,30 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.nextButton.setOnClickListener {
-            currentIndex = (currentIndex + 1) % questionBank.size
+            nextQuestion()
+        }
+
+        binding.previousButton.setOnClickListener {
+            currentIndex = (currentIndex - 1) % questionBank.size
             updateQuestion()
         }
 
+        binding.questionTextView.setOnClickListener {
+            nextQuestion()
+        }
+
         updateQuestion()
+
     }
 
     private fun updateQuestion() {
         val questionTextResId = questionBank[currentIndex].textResId
         binding.questionTextView.setText(questionTextResId)
+    }
+
+    private fun nextQuestion() {
+        currentIndex = (currentIndex + 1) % questionBank.size
+        updateQuestion()
     }
 
     private fun checkAnswer(userAnswer: Boolean) {
